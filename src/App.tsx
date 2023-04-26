@@ -1,7 +1,7 @@
 import Footer from 'layout/footer/Footer';
 import Header from 'layout/header/Header';
 import { lazy, Suspense, useEffect } from 'react';
-import { Outlet, useNavigate, useRoutes } from 'react-router-dom';
+import { Navigate, Outlet, useNavigate, useRoutes } from 'react-router-dom';
 import { getCurrentUser, selectAuthStatus } from 'shared/data-access/auth/authSlice';
 import { useAppDispatch, useAppSelector } from 'shared/data-access/common/configs/hooks';
 import GuardRoutes from 'shared/data-access/common/guards/GuardRoutes';
@@ -70,9 +70,7 @@ const App = () => {
       path: 'profile/:username',
       element: (
         <Suspense fallback={<div>Loading...</div>}>
-          <GuardRoutes>
-            <Profile />
-          </GuardRoutes>
+          <Profile />
         </Suspense>
       )
     },
@@ -90,30 +88,31 @@ const App = () => {
       path: 'article/:slug',
       element: (
         <Suspense fallback={<div>Loading...</div>}>
-          <GuardRoutes>
-            <Article />
-          </GuardRoutes>
+          <Article />
         </Suspense>
       )
     },
     {
-      path: 'editor',
+      path: 'editor/:slug?',
       element: (
         <Suspense fallback={<div>Loading...</div>}>
           <GuardRoutes>
             <Editor />
           </GuardRoutes>
         </Suspense>
-      ),
-      children: [{ path: ':slug', element: <Editor /> }]
+      )
     },
     {
-      path: '*',
+      path: '404',
       element: (
         <Suspense fallback={<div>Loading...</div>}>
           <NotFound />
         </Suspense>
       )
+    },
+    {
+      path: '*',
+      element: <Navigate to="404" />
     }
   ]);
 

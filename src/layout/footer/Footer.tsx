@@ -1,13 +1,18 @@
+import { Link } from 'react-router-dom';
+
 const Footer = () => {
   return (
     <footer>
       <div className="container">
-        <a href="/" className="logo-font">
+        <Link to="/" className="logo-font">
           conduit
-        </a>
+        </Link>
         <span className="attribution">
-          An interactive learning project from <a href="https://thinkster.io">Thinkster</a>. Code
-          &amp; design licensed under MIT.
+          An interactive learning project from{' '}
+          <a href="https://thinkster.io" target="_blank">
+            Thinkster
+          </a>
+          . Code &amp; design licensed under MIT.
         </span>
       </div>
     </footer>
